@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 import Movie from "./Movie";
 import Slider from "react-slick";
-import "./App.css";
 import ReactTypingEffect from "react-typing-effect";
 
 class App extends React.Component {
@@ -34,21 +33,35 @@ class App extends React.Component {
       slidesToScroll: 1,
     };
     return (
-      <section className="container">
+      <section className="">
         {isLoading ? (
-          <div className="loader">
-            <span className="loader__text">Loading...</span>
+          <div className="flex items-center justify-center">
+            <span className="">Loading...</span>
           </div>
         ) : (
-          <div className="test">
-            <h2>jejucleanboysclub</h2>
+          <div className="container max-w-full items-center px-8 py-6">
             <Slider {...settings}>
-              <div className="headline">
-                <ReactTypingEffect
-                  text={["우리는 쓰레기를 줍습니다.", "동참하시겠어요?"]}
-                  speed={100}
-                  typingDelay={1000}
-                />
+              <div className="flex ">
+                <div className="text-2xl h-32">
+                  <ReactTypingEffect
+                    displayTextRenderer={(text, i) => {
+                      return text;
+                    }}
+                    text={[
+                      "우리는 쓰레기를 줍습니다.",
+                      "우리는 지역 사회에 기여 합니다.",
+                      "우리는 jejucleanboysclub 입니다.",
+                    ]}
+                    speed={150}
+                    typingDelay={1500}
+                    eraseDelay={1800}
+                    eraseSpeed={100}
+                  />
+                </div>
+                <div>제주 하도리 활동</div>
+                <div>제주 하도리 활동</div>
+                <div>제주 하도리 활동</div>
+                <div>제주 하도리 활동</div>
               </div>
               <div>
                 <h3>카카오 맵</h3>
