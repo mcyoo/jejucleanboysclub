@@ -1,9 +1,8 @@
 module.exports = {
-  purge: [],
   theme: {
     extend: {
       padding: {
-        p1: "2rem",
+        1: "0.15rem",
         "50vh": "50vh",
         "75vh": "75vh",
       },

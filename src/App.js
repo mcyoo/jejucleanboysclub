@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
-import Movie from "./Movie";
+import KakaoMap from "./KakaoMap";
 import Slider from "react-slick";
+import "./assets/App.css";
 import ReactTypingEffect from "react-typing-effect";
 
 class App extends React.Component {
@@ -33,19 +34,29 @@ class App extends React.Component {
       slidesToScroll: 1,
     };
     return (
-      <section className="">
+      <section className="container mx-auto">
         {isLoading ? (
-          <div className="flex items-center justify-center">
+          <div className="flex">
             <span className="">Loading...</span>
           </div>
         ) : (
-          <div className="container max-w-full items-center px-8 py-6">
+          <div className="mb-24 bg-cover bg-center">
             <Slider {...settings}>
-              <div className="flex ">
+              <div className="flex">
                 <div className="text-2xl h-32">
                   <ReactTypingEffect
                     displayTextRenderer={(text, i) => {
-                      return text;
+                      return (
+                        <h1>
+                          {text.split("").map((char, i) => {
+                            const key = `${i}`;
+                            if (i === 3) {
+                              return <br></br>;
+                            }
+                            return <span key={key}>{char}</span>;
+                          })}
+                        </h1>
+                      );
                     }}
                     text={[
                       "우리는 쓰레기를 줍습니다.",
@@ -59,12 +70,10 @@ class App extends React.Component {
                   />
                 </div>
                 <div>제주 하도리 활동</div>
-                <div>제주 하도리 활동</div>
-                <div>제주 하도리 활동</div>
-                <div>제주 하도리 활동</div>
               </div>
-              <div>
+              <div className="text-center justify-items-center justify-center">
                 <h3>카카오 맵</h3>
+                <KakaoMap />
               </div>
               <div>
                 <h3>명예의 전당</h3>
