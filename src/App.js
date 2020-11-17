@@ -43,11 +43,11 @@ class App extends React.Component {
           <div className="mb-24 bg-cover bg-center">
             <Slider {...settings}>
               <div className="flex">
-                <div className="text-5xl lg:text-5xl sm:text-3xl sm:h-56">
+                <div className="text-5xl lg:text-5xl sm:text-xl sm:h-56">
                   <h3>우리는</h3>
                   <ReactTypingEffect
                     cursorRenderer={(cursor) => <h1>{cursor}</h1>}
-                    displayTextRenderer={(text, i) => {
+                    displayTextRenderer={(text, j) => {
                       return (
                         <h2>
                           {text.split("").map((char, i) => {
