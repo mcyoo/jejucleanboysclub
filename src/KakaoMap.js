@@ -12,7 +12,7 @@ const KakaoMap = () => {
     const map = new kakao.maps.Map(container, options);
   }, []);
 
-  return <div id="myMap" className="w-64 h-64"></div>;
+  return <div id="myMap" className="mt-4 w-full h-screen"></div>;
 };
 
 export default KakaoMap;

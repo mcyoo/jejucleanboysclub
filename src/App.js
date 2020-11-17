@@ -43,37 +43,38 @@ class App extends React.Component {
           <div className="mb-24 bg-cover bg-center">
             <Slider {...settings}>
               <div className="flex">
-                <div className="text-2xl h-32">
+                <div className="text-5xl lg:text-5xl sm:text-3xl sm:h-56">
+                  <h3>우리는</h3>
                   <ReactTypingEffect
+                    cursorRenderer={(cursor) => <h1>{cursor}</h1>}
                     displayTextRenderer={(text, i) => {
                       return (
-                        <h1>
+                        <h2>
                           {text.split("").map((char, i) => {
                             const key = `${i}`;
-                            if (i === 3) {
-                              return <br></br>;
-                            }
                             return <span key={key}>{char}</span>;
                           })}
-                        </h1>
+                        </h2>
                       );
                     }}
                     text={[
-                      "우리는 쓰레기를 줍습니다.",
-                      "우리는 지역 사회에 기여 합니다.",
-                      "우리는 jejucleanboysclub 입니다.",
+                      "쓰레기를 줍습니다.",
+                      "지역사회에 기여합니다.",
+                      "jejucleanboysclub입니다.",
                     ]}
-                    speed={150}
-                    typingDelay={1500}
-                    eraseDelay={1800}
+                    speed={120}
+                    typingDelay={1200}
+                    eraseDelay={1500}
                     eraseSpeed={100}
                   />
                 </div>
                 <div>제주 하도리 활동</div>
               </div>
               <div className="text-center justify-items-center justify-center">
-                <h3>카카오 맵</h3>
-                <KakaoMap />
+                <div className="text-lg">카카오 맵</div>
+                <div>
+                  <KakaoMap />
+                </div>
               </div>
               <div>
                 <h3>명예의 전당</h3>
