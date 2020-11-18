@@ -61,14 +61,73 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <script>
-      var container = document.getElementById("map");
-      var options = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 3,
-      };
-
-      var map = new kakao.maps.Map(container, options);
-    </script>
   </body>
 </html>
+<!--
+<script>
+      function isPassive() {
+        var supportsPassiveOption = false;
+        try {
+          addEventListener(
+            "test",
+            null,
+            Object.defineProperty({}, "passive", {
+              get: function () {
+                supportsPassiveOption = true;
+              },
+            })
+          );
+        } catch (e) {}
+        return supportsPassiveOption;
+      }
+
+      document.addEventListener(
+        "touchmove",
+        function (e) {
+          e.preventDefault();
+        },
+        isPassive()
+          ? {
+              capture: false,
+              passive: false,
+            }
+          : false
+      );
+      document.addEventListener(
+        "wheel",
+        function (e) {
+          e.preventDefault();
+        },
+        isPassive()
+          ? {
+              capture: false,
+              passive: false,
+            }
+          : false
+      );
+      document.addEventListener(
+        "touchstart",
+        function (e) {
+          e.preventDefault();
+        },
+        isPassive()
+          ? {
+              capture: false,
+              passive: false,
+            }
+          : false
+      );
+      document.addEventListener(
+        "onMouseDown",
+        function (e) {
+          e.preventDefault();
+        },
+        isPassive()
+          ? {
+              capture: false,
+              passive: false,
+            }
+          : false
+      );
+    </script>
+-->

@@ -10,6 +10,7 @@ class App extends React.Component {
     isLoading: false,
     movies: [],
   };
+
   getMovies = async () => {
     const {
       data: {
@@ -23,13 +24,20 @@ class App extends React.Component {
 
   componentDidMount() {
     //this.getMovies();
+    window.addEventListener(
+      "touchmove",
+      function (event) {
+        event.preventDefault();
+      },
+      false
+    );
   }
   render() {
     const { isLoading, movies } = this.state;
     const settings = {
       dots: true,
       infinite: true,
-      speed: 700,
+      speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
     };
@@ -40,7 +48,7 @@ class App extends React.Component {
             <span className="">Loading...</span>
           </div>
         ) : (
-          <div className="mb-24 bg-cover bg-center">
+          <div className="mb-20 bg-cover bg-center">
             <Slider {...settings}>
               <div className="flex">
                 <div className="text-5xl lg:text-5xl sm:text-xl sm:h-56">
@@ -72,7 +80,16 @@ class App extends React.Component {
               </div>
               <div className="text-center justify-items-center justify-center">
                 <div className="text-lg">카카오 맵</div>
-                <div>
+                <div
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
+                  onTouchStart={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
+                >
                   <KakaoMap />
                 </div>
               </div>
