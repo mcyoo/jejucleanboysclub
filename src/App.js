@@ -4,6 +4,9 @@ import KakaoMap from "./KakaoMap";
 import Slider from "react-slick";
 import "./assets/App.css";
 import ReactTypingEffect from "react-typing-effect";
+import linkicon1 from "./linkicon1.png";
+import linkicon2 from "./linkicon2.png";
+import linkicon3 from "./linkicon3.png";
 
 class App extends React.Component {
   state = {
@@ -37,21 +40,46 @@ class App extends React.Component {
     const settings = {
       dots: true,
       infinite: true,
-      speed: 500,
+      speed: 400,
       slidesToShow: 1,
       slidesToScroll: 1,
+      appendDots: (dots) => (
+        <div
+          style={{
+            position: "fixed",
+            padding: "30px",
+            backgroundColor: "white",
+            textAlign: "center",
+          }}
+        >
+          <div style={{}}> {dots} </div>
+        </div>
+      ),
+      customPaging: (i) => {
+        if (i === 0) {
+          return (
+            <img width="500" height="500" alt="linkicon1" src={linkicon1} />
+          );
+        }
+        if (i === 1) {
+          return <img width="500" height="500" src={linkicon2} />;
+        }
+        if (i === 2) {
+          return <img width="500" height="500" src={linkicon3} />;
+        }
+      },
     };
     return (
-      <section className="container mx-auto">
+      <section className="">
         {isLoading ? (
           <div className="flex">
             <span className="">Loading...</span>
           </div>
         ) : (
-          <div className="mb-20 bg-cover bg-center">
+          <div className="">
             <Slider {...settings}>
-              <div className="flex">
-                <div className="text-5xl lg:text-5xl sm:text-xl sm:h-56">
+              <div className="">
+                <div className="text-5xl lg:text-5xl sm:text-xl lg:mx-32 sm:mx-8">
                   <h3>우리는</h3>
                   <ReactTypingEffect
                     cursorRenderer={(cursor) => <h1>{cursor}</h1>}
@@ -76,10 +104,9 @@ class App extends React.Component {
                     eraseSpeed={100}
                   />
                 </div>
-                <div>제주 하도리 활동</div>
               </div>
-              <div className="text-center justify-items-center justify-center">
-                <div className="text-lg">카카오 맵</div>
+              <div className="text-center text-lg">
+                카카오 맵
                 <div
                   onMouseDown={(e) => {
                     e.preventDefault();
@@ -89,11 +116,12 @@ class App extends React.Component {
                     e.preventDefault();
                     e.stopPropagation();
                   }}
+                  className="mx-32 lg:mx-32 sm:mx-10"
                 >
                   <KakaoMap />
                 </div>
               </div>
-              <div>
+              <div className="text-center text-lg">
                 <h3>명예의 전당</h3>
               </div>
             </Slider>

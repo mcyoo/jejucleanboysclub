@@ -13,7 +13,7 @@ const KakaoMap = () => {
   }, []);
 
   return (
-    <div id="myMap" className="mt-10 w-full h-screen lg:h-screen sm:h-64"></div>
+    <div id="myMap" className="mt-10 w-max h-screen lg:h-screen sm:h-64"></div>
   );
 };
 
