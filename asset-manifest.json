@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/jejucleanboysclub/static/css/main.d8cbcb3f.chunk.css",
-    "main.js": "/jejucleanboysclub/static/js/main.463335c4.chunk.js",
-    "main.js.map": "/jejucleanboysclub/static/js/main.463335c4.chunk.js.map",
+    "main.js": "/jejucleanboysclub/static/js/main.0e7cd1b7.chunk.js",
+    "main.js.map": "/jejucleanboysclub/static/js/main.0e7cd1b7.chunk.js.map",
     "runtime-main.js": "/jejucleanboysclub/static/js/runtime-main.c34ea833.js",
     "runtime-main.js.map": "/jejucleanboysclub/static/js/runtime-main.c34ea833.js.map",
     "static/css/2.a293204f.chunk.css": "/jejucleanboysclub/static/css/2.a293204f.chunk.css",
@@ -12,6 +12,9 @@
     "static/css/2.a293204f.chunk.css.map": "/jejucleanboysclub/static/css/2.a293204f.chunk.css.map",
     "static/css/main.d8cbcb3f.chunk.css.map": "/jejucleanboysclub/static/css/main.d8cbcb3f.chunk.css.map",
     "static/js/2.d10b002f.chunk.js.LICENSE.txt": "/jejucleanboysclub/static/js/2.d10b002f.chunk.js.LICENSE.txt",
+    "static/media/linkicon1.7f1a3caf.png": "/jejucleanboysclub/static/media/linkicon1.7f1a3caf.png",
+    "static/media/linkicon2.5e75dd26.png": "/jejucleanboysclub/static/media/linkicon2.5e75dd26.png",
+    "static/media/linkicon3.afdf66a6.png": "/jejucleanboysclub/static/media/linkicon3.afdf66a6.png",
     "static/media/slick-theme.css": "/jejucleanboysclub/static/media/slick.c94f7671.ttf"
   },
   "entrypoints": [
@@ -19,6 +22,6 @@
     "static/css/2.a293204f.chunk.css",
     "static/js/2.d10b002f.chunk.js",
     "static/css/main.d8cbcb3f.chunk.css",
-    "static/js/main.463335c4.chunk.js"
+    "static/js/main.0e7cd1b7.chunk.js"
   ]
 }
