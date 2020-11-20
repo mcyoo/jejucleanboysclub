@@ -91,7 +91,7 @@ class App extends React.Component {
           <div className="">
             <Slider {...settings}>
               <div className="w-full">
-                <div className="text-5xl lg:text-5xl sm:text-xl lg:mx-32 sm:mx-8">
+                <div className="text-5xl lg:text-5xl sm:text-xl lg:mx-48 sm:mx-8">
                   <div className="mb-10 lg:mb-10 sm:mb-8">
                     <h4>우리는</h4>
                     <ReactTypingEffect
