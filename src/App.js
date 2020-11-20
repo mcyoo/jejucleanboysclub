@@ -92,8 +92,8 @@ class App extends React.Component {
             <Slider {...settings}>
               <div className="w-full">
                 <div className="text-5xl lg:text-5xl sm:text-xl lg:mx-32 sm:mx-8">
-                  <div className="mb-10 lg:mb-10 sm:mb-10">
-                    <h3>우리는</h3>
+                  <div className="mb-10 lg:mb-10 sm:mb-8">
+                    <h4>우리는</h4>
                     <ReactTypingEffect
                       cursorRenderer={(cursor) => <h1>{cursor}</h1>}
                       displayTextRenderer={(text, j) => {
@@ -117,22 +117,24 @@ class App extends React.Component {
                       eraseSpeed={100}
                     />
                   </div>
-                  <div className="border-t border-gray-400">
-                    <div className="text-xl lg:text-2xl sm:text-lg">
-                      <div className="mr-4">
-                        <br></br>누적 활동횟수 <CountUp end={30} delay={1} />
+                  <div className="border-t border-gray-400 text-3xl lg:text-3xl sm:text-xl">
+                    <div className="mt-10 flex justify-between">
+                      <div className="flex">누적 활동횟수</div>
+                      <div className="flex">
+                        <CountUp end={30} delay={1} duration={6} />
                       </div>
                     </div>
 
-                    <div className="text-xl lg:text-2xl sm:text-lg">
-                      <div className="mr-4">
-                        <br></br>참여인원 <CountUp end={30} delay={1} />
+                    <div className="mt-10 flex justify-between">
+                      <div className="flex">참여인원</div>
+                      <div className="flex">
+                        <CountUp end={30} delay={1} duration={6} />
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="text-center text-lg w-full">
+              <div className="text-center text-xl w-full">
                 작전 지역
                 <div
                   onMouseDown={(e) => {
@@ -148,7 +150,7 @@ class App extends React.Component {
                   <KakaoMap />
                 </div>
               </div>
-              <div className="text-center text-lg w-full">
+              <div className="text-center text-xl w-full">
                 <h3>명예의 전당</h3>
               </div>
             </Slider>
