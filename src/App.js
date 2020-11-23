@@ -107,9 +107,10 @@ class App extends React.Component {
                         );
                       }}
                       text={[
+                        "조은선 메롱!",
                         "쓰레기를 줍습니다.",
                         "지역사회에 기여합니다.",
-                        "jejucleanboysclub입니다.",
+                        "jejucleanboysclub 입니다.",
                       ]}
                       speed={120}
                       typingDelay={1200}
