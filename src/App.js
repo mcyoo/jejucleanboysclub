@@ -12,36 +12,16 @@ import CountUp from "react-countup";
 class App extends React.Component {
   state = {
     isLoading: false,
-    movies: [],
+    data: [],
   };
 
-  getMovies = async () => {
-    const {
-      data: {
-        data: { movies },
-      },
-    } = await axios.get(
-      "https://yts-proxy.now.sh/list_movies.json?sort_by=rating"
-    );
-    this.setState({ movies, isLoading: false });
-  };
-
-  componentDidMount() {
-    //this.getMovies();
-    window.addEventListener(
-      "touchmove",
-      function (event) {
-        event.preventDefault();
-      },
-      false
-    );
-  }
+  componentDidMount() {}
   render() {
     const { isLoading, movies } = this.state;
     const settings = {
       dots: true,
       infinite: true,
-      speed: 200,
+      speed: 300,
       slidesToShow: 1,
       slidesToScroll: 1,
       appendDots: (dots) => (
