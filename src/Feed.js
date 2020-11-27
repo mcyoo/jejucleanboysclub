@@ -1,14 +1,17 @@
 import React from "react";
 import like_icon from "./like.png";
 import comment_icon from "./comment.png";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function Feed({ content, url, img_url, location, like_count, comment_count }) {
   return (
     <div>
-      <div className="flex text-xl lg:text-lg sm:text-sm">{location}</div>
+      <div className="flex text-xl lg:text-lg sm:text-sm font-bold">
+        {location}
+      </div>
       <a href={url}>
         <div>
-          <img src={img_url}></img>
+          <LazyLoadImage alt={location} src={img_url} />
         </div>
         <div className="flex my-1 items-center text-xl lg:text-lg sm:text-sm">
           <div className="flex w-10 lg:w-10 lg:h-10 sm:w-6 sm:h-6">
@@ -20,7 +23,7 @@ function Feed({ content, url, img_url, location, like_count, comment_count }) {
           </div>
           <div className="flex">{comment_count}</div>
         </div>
-        <div className="mb-2 items-center text-xl lg:text-lg sm:text-sm">
+        <div className="mb-4 items-center text-xl lg:text-lg sm:text-sm">
           {content}
         </div>
       </a>

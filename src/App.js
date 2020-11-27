@@ -73,10 +73,11 @@ class App extends React.Component {
         <div
           style={{
             position: "fixed",
-            padding: "25px",
+            padding: "20px",
             backgroundColor: "white",
             textAlign: "center",
             borderTop: "1px solid #e2e8f0",
+            marginBottom: "10px",
           }}
         >
           <div style={{ flex: 1 }}> {dots} </div>
@@ -143,24 +144,46 @@ class App extends React.Component {
                     />
                   </div>
                   <div className="border-t border-gray-400 text-3xl lg:text-3xl sm:text-xl">
-                    <div className="mt-10 flex justify-between">
+                    <div className="my-6 flex justify-between">
                       <div className="flex">누적 활동횟수</div>
                       <div className="flex">
-                        <CountUp end={30} delay={1} duration={6} />
+                        <CountUp end={feed_count} delay={1} duration={6} />
                       </div>
                     </div>
 
-                    <div className="mt-10 flex justify-between">
+                    <div className="flex justify-between">
                       <div className="flex">참여인원</div>
                       <div className="flex">
-                        <CountUp end={30} delay={1} duration={6} />
+                        <CountUp
+                          end={friend_profile.length}
+                          delay={1}
+                          duration={6}
+                        />
                       </div>
                     </div>
-                    <div className="flex justify-end space-x-3 text-xl lg:text-xl sm:text-sm">
-                      <button onClick={this.like_sort}>좋아요순서</button>
-                      <button onClick={this.comment_sort}>댓글순서</button>
+                    <div className="flex justify-end space-x-3 text-xl lg:text-xl sm:text-sm mt-2">
+                      <button
+                        className={
+                          like
+                            ? "text-center border-gray-500 font-bold"
+                            : "text-center border-gray-500"
+                        }
+                        onClick={this.like_sort}
+                      >
+                        좋아요순서
+                      </button>
+                      <button
+                        className={
+                          comment
+                            ? "text-center border-gray-500 font-bold"
+                            : "text-center border-gray-500"
+                        }
+                        onClick={this.comment_sort}
+                      >
+                        댓글순서
+                      </button>
                     </div>
-                    <div className="mt-10 justify-center flex lg:mx-64">
+                    <div className="mt-2 justify-center flex lg:mx-70">
                       {like ? (
                         <div className="break-all">
                           {feeds_like.map((feed) => (
