@@ -46,7 +46,6 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://mcyoo.github.io/jejucleanboysclub/",
   "devDependencies": {
     "autoprefixer": "^9.0.0",
     "postcss-cli": "^8.2.0",

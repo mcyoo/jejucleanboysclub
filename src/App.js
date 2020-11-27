@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import KakaoMap from "./KakaoMap";
 import Slider from "react-slick";
 import "./assets/App.css";
@@ -8,16 +7,62 @@ import linkicon1 from "./linkicon1.png";
 import linkicon2 from "./linkicon2.png";
 import linkicon3 from "./linkicon3.png";
 import CountUp from "react-countup";
+import instagramData from "./instagram_data";
+import Feed from "./Feed";
 
 class App extends React.Component {
   state = {
     isLoading: false,
-    data: [],
+    feed_count: 0,
+    feed_location: [],
+    friend_profile: [],
+    feeds_date: [],
+    feeds_like: [],
+    feeds_comment: [],
+    like: true,
+    comment: false,
+  };
+  getData = () => {
+    const {
+      feed_count,
+      feed_location,
+      friend_profile,
+      feeds_date,
+      feeds_like,
+      feeds_comment,
+    } = instagramData;
+    this.setState({
+      feed_count,
+      feed_location,
+      friend_profile,
+      feeds_date,
+      feeds_like,
+      feeds_comment,
+      isLoading: false,
+    });
+  };
+  like_sort = () => {
+    this.setState(() => ({ like: true, comment: false }));
+  };
+  comment_sort = () => {
+    this.setState(() => ({ comment: true, like: false }));
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.getData();
+  }
   render() {
-    const { isLoading, movies } = this.state;
+    const {
+      isLoading,
+      feed_count,
+      feed_location,
+      friend_profile,
+      feeds_date,
+      feeds_like,
+      feeds_comment,
+      like,
+      comment,
+    } = this.state;
     const settings = {
       dots: true,
       infinite: true,
@@ -87,7 +132,6 @@ class App extends React.Component {
                         );
                       }}
                       text={[
-                        "조은선 메롱!",
                         "쓰레기를 줍습니다.",
                         "지역사회에 기여합니다.",
                         "jejucleanboysclub 입니다.",
@@ -111,6 +155,39 @@ class App extends React.Component {
                       <div className="flex">
                         <CountUp end={30} delay={1} duration={6} />
                       </div>
+                    </div>
+                    <div className="flex justify-end space-x-3 text-xl lg:text-xl sm:text-sm">
+                      <button onClick={this.like_sort}>좋아요순서</button>
+                      <button onClick={this.comment_sort}>댓글순서</button>
+                    </div>
+                    <div className="mt-10 justify-center flex lg:mx-64">
+                      {like ? (
+                        <div className="break-all">
+                          {feeds_like.map((feed) => (
+                            <Feed
+                              content={feed.content}
+                              url={feed.url}
+                              img_url={feed.img_url}
+                              location={feed.location}
+                              like_count={feed.like_count}
+                              comment_count={feed.comment_count}
+                            />
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="">
+                          {feeds_comment.map((feed) => (
+                            <Feed
+                              content={feed.content}
+                              url={feed.url}
+                              img_url={feed.img_url}
+                              location={feed.location}
+                              like_count={feed.like_count}
+                              comment_count={feed.comment_count}
+                            />
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
