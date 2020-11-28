@@ -23,7 +23,7 @@ function Feed({ content, url, img_url, location, like_count, comment_count }) {
           </div>
           <div className="flex">{comment_count}</div>
         </div>
-        <div className="mb-4 items-center text-xl lg:text-lg sm:text-sm">
+        <div className="mb-4 items-center text-xl lg:text-lg sm:text-sm lg:w-80 sm:w-full">
           {content}
         </div>
       </a>

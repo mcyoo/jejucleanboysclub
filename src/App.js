@@ -73,11 +73,11 @@ class App extends React.Component {
         <div
           style={{
             position: "fixed",
-            padding: "20px",
+            padding: "12px",
             backgroundColor: "white",
             textAlign: "center",
             borderTop: "1px solid #e2e8f0",
-            marginBottom: "10px",
+            marginBottom: "17px",
           }}
         >
           <div style={{ flex: 1 }}> {dots} </div>
@@ -183,7 +183,7 @@ class App extends React.Component {
                         댓글순서
                       </button>
                     </div>
-                    <div className="mt-2 justify-center flex lg:mx-70">
+                    <div className="mt-2 justify-center flex mb-32">
                       {like ? (
                         <div className="break-all">
                           {feeds_like.map((feed) => (
@@ -216,7 +216,7 @@ class App extends React.Component {
                 </div>
               </div>
               <div className="text-center text-xl w-full">
-                작전 지역
+                활동 지역
                 <div
                   onMouseDown={(e) => {
                     e.preventDefault();
@@ -226,9 +226,9 @@ class App extends React.Component {
                     e.preventDefault();
                     e.stopPropagation();
                   }}
-                  className="mx-32 lg:mx-64 sm:mx-12"
+                  className="mx-32 lg:mx-64 sm:mx-6"
                 >
-                  <KakaoMap />
+                  <KakaoMap feed_location={feed_location} />
                 </div>
               </div>
               <div className="text-center text-xl w-full">
