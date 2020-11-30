@@ -228,7 +228,7 @@ class App extends React.Component {
                   }}
                   className="mx-32 lg:mx-64 sm:mx-6"
                 >
-                  <KakaoMap feed_location={feed_location} />
+                  <KakaoMap />
                 </div>
               </div>
               <div className="text-center text-xl w-full">
