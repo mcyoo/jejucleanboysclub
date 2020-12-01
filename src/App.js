@@ -7,7 +7,7 @@ import linkicon1 from "./linkicon1.png";
 import linkicon2 from "./linkicon2.png";
 import linkicon3 from "./linkicon3.png";
 import CountUp from "react-countup";
-import instagramData from "./instagram_data";
+import instagramData from "/home/ec2-user/frontend/instagram_data";
 import Feed from "./Feed";
 
 class App extends React.Component {
