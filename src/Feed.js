@@ -11,7 +11,7 @@ function Feed({ content, url, img_url, location, like_count, comment_count }) {
       </div>
       <a href={url}>
         <div>
-          <LazyLoadImage alt={location} src={img_url} />
+          <LazyLoadImage alt={location} src={img_url} effect="blur" />
         </div>
         <div className="flex my-1 items-center text-xl lg:text-lg sm:text-sm">
           <div className="flex w-10 lg:w-10 lg:h-10 sm:w-6 sm:h-6">

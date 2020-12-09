@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.0.0",
+    "json-loader": "^0.5.7",
     "postcss-cli": "^8.2.0",
     "tailwindcss": "^1.9.6"
   }

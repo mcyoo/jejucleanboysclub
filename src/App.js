@@ -7,12 +7,11 @@ import linkicon1 from "./linkicon1.png";
 import linkicon2 from "./linkicon2.png";
 import linkicon3 from "./linkicon3.png";
 import CountUp from "react-countup";
-import instagramData from "/home/ec2-user/frontend/instagram_data";
 import Feed from "./Feed";
 
 class App extends React.Component {
   state = {
-    isLoading: false,
+    isLoading: true,
     feed_count: 0,
     feed_location: [],
     friend_profile: [],
@@ -22,7 +21,20 @@ class App extends React.Component {
     like: true,
     comment: false,
   };
-  getData = () => {
+  getJson = () => {
+    let data = fetch("instagram_data.json", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    }).then(function (response) {
+      return response.json();
+    });
+    return data;
+  };
+
+  getData = async () => {
+    const instagramData = await this.getJson();
     const {
       feed_count,
       feed_location,
@@ -69,6 +81,8 @@ class App extends React.Component {
       speed: 300,
       slidesToShow: 1,
       slidesToScroll: 1,
+      afterChange: () =>
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" }),
       appendDots: (dots) => (
         <div
           style={{
@@ -110,7 +124,7 @@ class App extends React.Component {
     return (
       <section className="">
         {isLoading ? (
-          <div className="flex">
+          <div className="flex justify-center relative mt-24">
             <span className="">Loading...</span>
           </div>
         ) : (
@@ -231,8 +245,27 @@ class App extends React.Component {
                   <KakaoMap />
                 </div>
               </div>
-              <div className="text-center text-xl w-full">
-                <h3>명예의 전당</h3>
+              <div className="w-full mx-16 lg:mx-16 sm:mx-3">
+                <div className="text-center text-xl mb-10">명예의 전당</div>
+                <div className="flex flex-wrap text-sm lg:text-sm sm:text-xs">
+                  {friend_profile.map((profile) => (
+                    <div className="flex flex-col items-center lg:mr-10 lg:mb-8 sm:mr-3 sm:mb-3">
+                      <div>{profile.name}</div>
+                      <div>{profile.count}</div>
+                      <div className="flex">
+                        <a
+                          href={profile.url}
+                          className="bg-gradient-to-r from-yellow-400 via-pink-400 to-red-600 p-1 lg:p-1 sm:p-0 rounded-full"
+                        >
+                          <img
+                            className="w-16 lg:w-16 sm:w-10 rounded-full border-white border-1"
+                            src={profile.img_url}
+                          />
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </Slider>
           </div>
