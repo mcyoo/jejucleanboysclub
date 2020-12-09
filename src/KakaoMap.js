@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import instagramData from "./instagram_data";
+//import instagramData from "./instagram_data";
 import cleanimage from "./cleanimage.png";
 
 const { kakao } = window;
 
-const KakaoMap = () => {
+const KakaoMap = ({ feed_location }) => {
   useEffect(() => {
     // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
     var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
@@ -17,7 +17,7 @@ const KakaoMap = () => {
     // 장소 검색 객체를 생성합니다
     var ps = new kakao.maps.services.Places();
     //var location = { name: "하도해변", count: 3 };
-    const { feed_location } = instagramData;
+    //const { feed_location } = instagramData;
     // 키워드로 장소를 검색합니다
     feed_location.map((location) => {
       ps.keywordSearch(location.name, placesSearchCB);

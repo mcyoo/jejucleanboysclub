@@ -242,23 +242,23 @@ class App extends React.Component {
                   }}
                   className="mx-32 lg:mx-64 sm:mx-6"
                 >
-                  <KakaoMap />
+                  <KakaoMap feed_location={feed_location} />
                 </div>
               </div>
-              <div className="w-full mx-16 lg:mx-16 sm:mx-3">
-                <div className="text-center text-xl mb-10">명예의 전당</div>
-                <div className="flex flex-wrap text-sm lg:text-sm sm:text-xs">
+              <div className="w-full">
+                <div className="text-center text-xl mb-6">명예의 전당</div>
+                <div className="flex flex-wrap text-sm lg:text-sm sm:text-xs mx-24 lg:mx-24 sm:mx-2 justify-items-auto justify-evenly">
                   {friend_profile.map((profile) => (
-                    <div className="flex flex-col items-center lg:mr-10 lg:mb-8 sm:mr-3 sm:mb-3">
-                      <div>{profile.name}</div>
+                    <div className="flex flex-col items-center lg:mx-10 lg:mb-12 sm:mx-2 sm:mb-6">
                       <div>{profile.count}</div>
+                      <div className="mb-2">{profile.name}</div>
                       <div className="flex">
                         <a
                           href={profile.url}
                           className="bg-gradient-to-r from-yellow-400 via-pink-400 to-red-600 p-1 lg:p-1 sm:p-0 rounded-full"
                         >
                           <img
-                            className="w-16 lg:w-16 sm:w-10 rounded-full border-white border-1"
+                            className="w-20 lg:w-20 sm:w-12 rounded-full border-white border-1"
                             src={profile.img_url}
                           />
                         </a>
