@@ -1,9 +1,20 @@
 import React from "react";
 import like_icon from "./like.png";
 import comment_icon from "./comment.png";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import {
+  LazyLoadImage,
+  trackWindowScroll,
+} from "react-lazy-load-image-component";
 
-function Feed({ content, url, img_url, location, like_count, comment_count }) {
+function Feed({
+  content,
+  url,
+  img_url,
+  location,
+  like_count,
+  comment_count,
+  scrollPosition,
+}) {
   return (
     <div>
       <div className="flex text-xl lg:text-lg sm:text-sm font-bold">
@@ -11,7 +22,12 @@ function Feed({ content, url, img_url, location, like_count, comment_count }) {
       </div>
       <a href={url}>
         <div>
-          <LazyLoadImage alt={location} src={img_url} effect="blur" />
+          <LazyLoadImage
+            alt={location}
+            src={img_url}
+            effect="opacity"
+            scrollPosition={scrollPosition}
+          />
         </div>
         <div className="flex my-1 items-center text-xl lg:text-lg sm:text-sm">
           <div className="flex w-10 lg:w-10 lg:h-10 sm:w-6 sm:h-6">
@@ -30,4 +46,4 @@ function Feed({ content, url, img_url, location, like_count, comment_count }) {
     </div>
   );
 }
-export default Feed;
+export default trackWindowScroll(Feed);

@@ -100,21 +100,21 @@ class App extends React.Component {
       customPaging: (i) => {
         if (i === 0) {
           return (
-            <div style={{ flex: 1, width: "3em" }}>
+            <div style={{ flex: 1, width: "2em" }}>
               <img alt="linkicon1" src={linkicon1} />
             </div>
           );
         }
         if (i === 1) {
           return (
-            <div style={{ flex: 1, width: "3em" }}>
+            <div style={{ flex: 1, width: "2em" }}>
               <img alt="linkicon2" src={linkicon2} />
             </div>
           );
         }
         if (i === 2) {
           return (
-            <div style={{ flex: 1, width: "3em" }}>
+            <div style={{ flex: 1, width: "2em" }}>
               <img alt="linkicon3" src={linkicon3} />
             </div>
           );
