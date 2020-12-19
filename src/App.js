@@ -18,7 +18,8 @@ class App extends React.Component {
     feeds_date: [],
     feeds_like: [],
     feeds_comment: [],
-    like: true,
+    date: true,
+    like: false,
     comment: false,
   };
   getJson = () => {
@@ -53,11 +54,15 @@ class App extends React.Component {
       isLoading: false,
     });
   };
+  date_sort = () => {
+    this.setState(() => ({ date: true, like: false, comment: false }));
+  };
+
   like_sort = () => {
-    this.setState(() => ({ like: true, comment: false }));
+    this.setState(() => ({ date: false, like: true, comment: false }));
   };
   comment_sort = () => {
-    this.setState(() => ({ comment: true, like: false }));
+    this.setState(() => ({ date: false, comment: true, like: false }));
   };
 
   componentDidMount() {
@@ -72,6 +77,7 @@ class App extends React.Component {
       feeds_date,
       feeds_like,
       feeds_comment,
+      date,
       like,
       comment,
     } = this.state;
@@ -100,22 +106,34 @@ class App extends React.Component {
       customPaging: (i) => {
         if (i === 0) {
           return (
-            <div style={{ flex: 1, width: "2em" }}>
-              <img alt="linkicon1" src={linkicon1} />
+            <div style={{ flex: 1 }}>
+              <img
+                className="w-10 lg:w-10 sm:w-8"
+                alt="linkicon1"
+                src={linkicon1}
+              />
             </div>
           );
         }
         if (i === 1) {
           return (
-            <div style={{ flex: 1, width: "2em" }}>
-              <img alt="linkicon2" src={linkicon2} />
+            <div style={{ flex: 1 }}>
+              <img
+                className="w-10 lg:w-10 sm:w-8"
+                alt="linkicon2"
+                src={linkicon2}
+              />
             </div>
           );
         }
         if (i === 2) {
           return (
-            <div style={{ flex: 1, width: "2em" }}>
-              <img alt="linkicon3" src={linkicon3} />
+            <div style={{ flex: 1 }}>
+              <img
+                className="w-10 lg:w-10 sm:w-8"
+                alt="linkicon3"
+                src={linkicon3}
+              />
             </div>
           );
         }
@@ -131,7 +149,7 @@ class App extends React.Component {
           <div className="">
             <Slider {...settings}>
               <div className="w-full">
-                <div className="text-5xl lg:text-5xl sm:text-xl lg:mx-48 sm:mx-8">
+                <div className="text-5xl lg:text-5xl sm:text-xl lg:mx-48 sm:mx-4">
                   <div className="mb-10 lg:mb-10 sm:mb-8">
                     <h4>우리는</h4>
                     <ReactTypingEffect
@@ -175,12 +193,18 @@ class App extends React.Component {
                         />
                       </div>
                     </div>
-                    <div className="flex justify-end space-x-3 text-xl lg:text-xl sm:text-sm mt-2">
+                    <div className="flex justify-end space-x-3 lg:space-x-3 text-xl lg:text-xl sm:text-sm my-3 sm:space-x-1">
                       <button
                         className={
-                          like
-                            ? "text-center border-gray-500 font-bold"
-                            : "text-center border-gray-500"
+                          "text-center border-gray-500 bg-blue-600 py-2 px-4 lg:py-2 lg:px-4 sm:py-1 sm:px-3 text-white rounded-lg"
+                        }
+                        onClick={this.date_sort}
+                      >
+                        날짜순서
+                      </button>
+                      <button
+                        className={
+                          "text-center border-gray-500 bg-blue-600 py-2 px-4 lg:py-2 lg:px-4 sm:py-1 sm:px-3 text-white rounded-lg"
                         }
                         onClick={this.like_sort}
                       >
@@ -188,9 +212,7 @@ class App extends React.Component {
                       </button>
                       <button
                         className={
-                          comment
-                            ? "text-center border-gray-500 font-bold"
-                            : "text-center border-gray-500"
+                          "text-center border-gray-500 bg-blue-600 py-2 px-4 lg:py-2 lg:px-4 sm:py-1 sm:px-3 text-white rounded-lg"
                         }
                         onClick={this.comment_sort}
                       >
@@ -198,7 +220,21 @@ class App extends React.Component {
                       </button>
                     </div>
                     <div className="mt-2 justify-center flex mb-32">
-                      {like ? (
+                      {date && (
+                        <div className="break-all">
+                          {feeds_date.map((feed) => (
+                            <Feed
+                              content={feed.content}
+                              url={feed.url}
+                              img_url={feed.img_url}
+                              location={feed.location}
+                              like_count={feed.like_count}
+                              comment_count={feed.comment_count}
+                            />
+                          ))}
+                        </div>
+                      )}
+                      {like && (
                         <div className="break-all">
                           {feeds_like.map((feed) => (
                             <Feed
@@ -211,8 +247,9 @@ class App extends React.Component {
                             />
                           ))}
                         </div>
-                      ) : (
-                        <div className="">
+                      )}
+                      {comment && (
+                        <div className="break-all">
                           {feeds_comment.map((feed) => (
                             <Feed
                               content={feed.content}
@@ -240,7 +277,7 @@ class App extends React.Component {
                     e.preventDefault();
                     e.stopPropagation();
                   }}
-                  className="mx-32 lg:mx-64 sm:mx-6"
+                  className="mx-32 lg:mx-64 sm:mx-4"
                 >
                   <KakaoMap feed_location={feed_location} />
                 </div>
