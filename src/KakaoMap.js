@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
-//import instagramData from "./instagram_data";
 import cleanimage from "./cleanimage.png";
+import home_jcbc from "./JCBC.png";
 
 const { kakao } = window;
 
 const KakaoMap = ({ feed_location }) => {
   useEffect(() => {
-    // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
-    var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
     const container = document.getElementById("myMap");
     const options = {
       center: new kakao.maps.LatLng(33.371776, 126.543786),
@@ -16,49 +14,53 @@ const KakaoMap = ({ feed_location }) => {
     const map = new kakao.maps.Map(container, options);
     // 장소 검색 객체를 생성합니다
     var ps = new kakao.maps.services.Places();
-    //var location = { name: "하도해변", count: 3 };
-    //const { feed_location } = instagramData;
-    // 키워드로 장소를 검색합니다
+    var imageSize = new kakao.maps.Size(24, 35);
+    var markerImage = new kakao.maps.MarkerImage(cleanimage, imageSize);
+
+    function placesSearchCB(data, status, pagination) {
+      if (status === kakao.maps.services.Status.OK) {
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+        // LatLngBounds 객체에 좌표를 추가합니다
+
+        var markers = data.map(function (place) {
+          return new kakao.maps.Marker({
+            map: map,
+            position: new kakao.maps.LatLng(place.y, place.x),
+            image: markerImage,
+          });
+        });
+      }
+    }
+
     feed_location.map((location) => {
       ps.keywordSearch(location.name, placesSearchCB);
-
-      // 키워드 검색 완료 시 호출되는 콜백함수 입니다
-      function placesSearchCB(data, status, pagination) {
-        if (status === kakao.maps.services.Status.OK) {
-          // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-          // LatLngBounds 객체에 좌표를 추가합니다
-          for (var i = 0; i < data.length; i++) {
-            displayMarker(data[i]);
-          }
-        }
-      }
-
-      // 지도에 마커를 표시하는 함수입니다
-      function displayMarker(place) {
-        // 마커를 생성하고 지도에 표시합니다
-        // 마커 이미지의 이미지 크기 입니다
-        var imageSize = new kakao.maps.Size(24, 35);
-
-        // 마커 이미지를 생성합니다
-        var markerImage = new kakao.maps.MarkerImage(cleanimage, imageSize);
-        var marker = new kakao.maps.Marker({
-          map: map,
-          position: new kakao.maps.LatLng(place.y, place.x),
-          image: markerImage,
-        });
-
-        // 마커에 클릭이벤트를 등록합니다
-        kakao.maps.event.addListener(marker, "click", function () {
-          // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-          infowindow.setContent(
-            '<div style="width:150px;text-align:center;padding:6px 0;"> 청소 횟수 ' +
-              location.count +
-              "</div>"
-          );
-          infowindow.open(map, marker);
-        });
-      }
     });
+
+    var imageSizee = new kakao.maps.Size(40, 40);
+    var markerImagee = new kakao.maps.MarkerImage(home_jcbc, imageSizee);
+    var markerPositionn = new kakao.maps.LatLng(33.511632, 126.89077); // 마커가 표시될 위치입니다
+
+    // 마커를 생성합니다
+    var markerr = new kakao.maps.Marker({
+      position: markerPositionn,
+      image: markerImagee, // 마커이미지 설정
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    markerr.setMap(map);
+
+    var iwContent =
+        '<div style="padding:0.3em; font-size: small; text-align: center; margin-left:2em">JCBC 사무실</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+      iwPosition = new kakao.maps.LatLng(33.511632, 126.89077); //인포윈도우 표시 위치입니다
+
+    // 인포윈도우를 생성합니다
+    var infowindow = new kakao.maps.InfoWindow({
+      position: iwPosition,
+      content: iwContent,
+    });
+
+    // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+    infowindow.open(map, markerr);
   }, []);
 
   return (

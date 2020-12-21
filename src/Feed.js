@@ -17,7 +17,7 @@ function Feed({
 }) {
   return (
     <div>
-      <div className="flex text-xl lg:text-lg sm:text-sm font-bold">
+      <div className="flex text-xl lg:text-lg sm:text-xs font-bold">
         {location}
       </div>
       <a href={url}>
@@ -29,18 +29,20 @@ function Feed({
             scrollPosition={scrollPosition}
           />
         </div>
-        <div className="flex my-1 items-center text-xl lg:text-lg sm:text-sm">
-          <div className="flex w-10 lg:w-10 lg:h-10 sm:w-6 sm:h-6">
+        <div className="flex my-1 items-center text-xl lg:text-lg sm:text-xs">
+          <div className="flex w-10 lg:w-10 lg:h-10 sm:w-4 sm:h-4">
             <img src={like_icon}></img>
           </div>
           <div className="flex">{like_count}</div>
-          <div className="flex w-10 lg:w-10 lg:h-10 sm:w-6 sm:h-6">
+          <div className="flex w-10 lg:w-10 lg:h-10 sm:w-4 sm:h-4">
             <img src={comment_icon}></img>
           </div>
           <div className="flex">{comment_count}</div>
         </div>
-        <div className="mb-4 items-center text-xl lg:text-lg sm:text-sm lg:w-80 sm:w-full">
-          {content}
+        <div className="flex">
+          <div className="break-all mb-4 items-center text-xl lg:text-lg sm:text-xs lg:w-80 sm:w-full">
+            {content}
+          </div>
         </div>
       </a>
     </div>

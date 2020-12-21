@@ -8,6 +8,7 @@ import linkicon2 from "./linkicon2.png";
 import linkicon3 from "./linkicon3.png";
 import CountUp from "react-countup";
 import Feed from "./Feed";
+import insta_dm from "./insta_dm.png";
 
 class App extends React.Component {
   state = {
@@ -21,6 +22,7 @@ class App extends React.Component {
     date: true,
     like: false,
     comment: false,
+    update_time: "",
   };
   getJson = () => {
     let data = fetch("instagram_data.json", {
@@ -43,6 +45,7 @@ class App extends React.Component {
       feeds_date,
       feeds_like,
       feeds_comment,
+      update_time,
     } = instagramData;
     this.setState({
       feed_count,
@@ -52,6 +55,7 @@ class App extends React.Component {
       feeds_like,
       feeds_comment,
       isLoading: false,
+      update_time,
     });
   };
   date_sort = () => {
@@ -80,24 +84,29 @@ class App extends React.Component {
       date,
       like,
       comment,
+      update_time,
     } = this.state;
     const settings = {
       dots: true,
       infinite: true,
-      speed: 300,
+      speed: 400,
       slidesToShow: 1,
       slidesToScroll: 1,
-      afterChange: () =>
-        window.scrollTo({ top: 0, left: 0, behavior: "smooth" }),
+      swipeToSlide: true,
+      afterChange: (i) => {
+        if (i !== 0) {
+          window.scrollTo({ top: 0, left: 0 });
+        }
+      },
       appendDots: (dots) => (
         <div
           style={{
             position: "fixed",
-            padding: "12px",
+            padding: "10px",
             backgroundColor: "white",
             textAlign: "center",
             borderTop: "1px solid #e2e8f0",
-            marginBottom: "17px",
+            marginBottom: "25px",
           }}
         >
           <div style={{ flex: 1 }}> {dots} </div>
@@ -108,7 +117,7 @@ class App extends React.Component {
           return (
             <div style={{ flex: 1 }}>
               <img
-                className="w-10 lg:w-10 sm:w-8"
+                className="w-12 lg:w-12 sm:w-10"
                 alt="linkicon1"
                 src={linkicon1}
               />
@@ -119,7 +128,7 @@ class App extends React.Component {
           return (
             <div style={{ flex: 1 }}>
               <img
-                className="w-10 lg:w-10 sm:w-8"
+                className="w-12 lg:w-12 sm:w-10"
                 alt="linkicon2"
                 src={linkicon2}
               />
@@ -130,7 +139,7 @@ class App extends React.Component {
           return (
             <div style={{ flex: 1 }}>
               <img
-                className="w-10 lg:w-10 sm:w-8"
+                className="w-12 lg:w-12 sm:w-10"
                 alt="linkicon3"
                 src={linkicon3}
               />
@@ -147,8 +156,11 @@ class App extends React.Component {
           </div>
         ) : (
           <div className="">
+            <div className="flex text-xs justify-end mr-5 mb-5">
+              {update_time} Update
+            </div>
             <Slider {...settings}>
-              <div className="w-full">
+              <div className="w-screen">
                 <div className="text-5xl lg:text-5xl sm:text-xl lg:mx-48 sm:mx-4">
                   <div className="mb-10 lg:mb-10 sm:mb-8">
                     <h4>우리는</h4>
@@ -165,7 +177,7 @@ class App extends React.Component {
                         );
                       }}
                       text={[
-                        "쓰레기를 줍습니다.",
+                        "해양 쓰레기를 줍습니다.",
                         "지역사회에 기여합니다.",
                         "jejucleanboysclub 입니다.",
                       ]}
@@ -221,7 +233,7 @@ class App extends React.Component {
                     </div>
                     <div className="mt-2 justify-center flex mb-32">
                       {date && (
-                        <div className="break-all">
+                        <div className="break-all grid grid-cols-3 gap-4">
                           {feeds_date.map((feed) => (
                             <Feed
                               content={feed.content}
@@ -235,7 +247,7 @@ class App extends React.Component {
                         </div>
                       )}
                       {like && (
-                        <div className="break-all">
+                        <div className="break-all grid grid-cols-3 gap-4">
                           {feeds_like.map((feed) => (
                             <Feed
                               content={feed.content}
@@ -249,7 +261,7 @@ class App extends React.Component {
                         </div>
                       )}
                       {comment && (
-                        <div className="break-all">
+                        <div className="break-all grid grid-cols-3 gap-4">
                           {feeds_comment.map((feed) => (
                             <Feed
                               content={feed.content}
@@ -266,7 +278,7 @@ class App extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className="text-center text-xl w-full">
+              <div className="text-center text-xl w-screen">
                 활동 지역
                 <div
                   onMouseDown={(e) => {
@@ -282,7 +294,7 @@ class App extends React.Component {
                   <KakaoMap feed_location={feed_location} />
                 </div>
               </div>
-              <div className="w-full">
+              <div className="w-screen">
                 <div className="text-center text-xl mb-6">명예의 전당</div>
                 <div className="flex flex-wrap text-sm lg:text-sm sm:text-xs mx-24 lg:mx-24 sm:mx-2 justify-items-auto justify-evenly">
                   {friend_profile.map((profile) => (
@@ -302,6 +314,15 @@ class App extends React.Component {
                       </div>
                     </div>
                   ))}
+                </div>
+                <div className="flex text-center text-lg justify-center mt-6">
+                  명예의 전당에 이름을 올리세요!
+                  <a href="https://www.instagram.com/jejucleanboysclub/?hl=ko">
+                    <img
+                      className="ml-2 w-14 sm:w-8 md:w-8 lg:w-14"
+                      src={insta_dm}
+                    />
+                  </a>
                 </div>
               </div>
             </Slider>
