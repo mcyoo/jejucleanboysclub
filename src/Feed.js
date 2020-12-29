@@ -31,11 +31,11 @@ function Feed({
         </div>
         <div className="flex my-1 items-center text-xl lg:text-lg sm:text-xs">
           <div className="flex w-10 lg:w-10 lg:h-10 sm:w-4 sm:h-4">
-            <img src={like_icon}></img>
+            <img src={like_icon} alt="like_icon"></img>
           </div>
           <div className="flex">{like_count}</div>
           <div className="flex w-10 lg:w-10 lg:h-10 sm:w-4 sm:h-4">
-            <img src={comment_icon}></img>
+            <img src={comment_icon} alt="comment_icon"></img>
           </div>
           <div className="flex">{comment_count}</div>
         </div>

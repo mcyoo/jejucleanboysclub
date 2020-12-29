@@ -87,16 +87,15 @@ class App extends React.Component {
       update_time,
     } = this.state;
     const settings = {
+      adaptiveHeight: true,
       dots: true,
       infinite: true,
       speed: 400,
       slidesToShow: 1,
       slidesToScroll: 1,
       swipeToSlide: true,
-      afterChange: (i) => {
-        if (i !== 0) {
-          window.scrollTo({ top: 0, left: 0 });
-        }
+      beforeChange: () => {
+        window.scrollTo({ top: 0, left: 0 });
       },
       appendDots: (dots) => (
         <div
@@ -157,7 +156,7 @@ class App extends React.Component {
         ) : (
           <div className="">
             <div className="flex text-xs justify-end mr-5 mb-5">
-              {update_time} Update
+              🤖{update_time} Update
             </div>
             <Slider {...settings}>
               <div className="w-screen">
@@ -233,7 +232,7 @@ class App extends React.Component {
                     </div>
                     <div className="mt-2 justify-center flex mb-32">
                       {date && (
-                        <div className="break-all grid grid-cols-3 gap-4">
+                        <div className="break-all grid grid-cols-3 lg:gap-5 sm:gap-2">
                           {feeds_date.map((feed) => (
                             <Feed
                               content={feed.content}
@@ -247,7 +246,7 @@ class App extends React.Component {
                         </div>
                       )}
                       {like && (
-                        <div className="break-all grid grid-cols-3 gap-4">
+                        <div className="break-all grid grid-cols-3 lg:gap-5 sm:gap-2">
                           {feeds_like.map((feed) => (
                             <Feed
                               content={feed.content}
@@ -261,7 +260,7 @@ class App extends React.Component {
                         </div>
                       )}
                       {comment && (
-                        <div className="break-all grid grid-cols-3 gap-4">
+                        <div className="break-all grid grid-cols-3 lg:gap-5 sm:gap-2">
                           {feeds_comment.map((feed) => (
                             <Feed
                               content={feed.content}
@@ -278,6 +277,7 @@ class App extends React.Component {
                   </div>
                 </div>
               </div>
+
               <div className="text-center text-xl w-screen">
                 활동 지역
                 <div
@@ -289,11 +289,26 @@ class App extends React.Component {
                     e.preventDefault();
                     e.stopPropagation();
                   }}
-                  className="mx-32 lg:mx-64 sm:mx-4"
+                  className="mx-48 lg:mx-48 md:mx-16 sm:mx-4"
                 >
                   <KakaoMap feed_location={feed_location} />
                 </div>
+                <div className="mx-48 lg:mx-48 md:mx-16 sm:mx-4">
+                  {feed_location.map((location) => (
+                    <div className="my-6 flex justify-between lg:text-xl sm:text-sm">
+                      <div className="flex">{location.name}</div>
+                      <div className="flex">{location.count}</div>
+                    </div>
+                  ))}
+                  <div className="mt-8 lg:text-xl sm:text-sm text-left border-t border-gray-400">
+                    <div className="mt-8">⏰ 매일 오전 8시</div>
+                    <div className="mt-2">
+                      🏝 하도해변 중심으로 해변가 반경 1Km 이내 청소
+                    </div>
+                  </div>
+                </div>
               </div>
+
               <div className="w-screen">
                 <div className="text-center text-xl mb-6">명예의 전당</div>
                 <div className="flex flex-wrap text-sm lg:text-sm sm:text-xs mx-24 lg:mx-24 sm:mx-2 justify-items-auto justify-evenly">
@@ -309,6 +324,7 @@ class App extends React.Component {
                           <img
                             className="w-20 lg:w-20 sm:w-12 rounded-full border-white border-1"
                             src={profile.img_url}
+                            alt={profile.name}
                           />
                         </a>
                       </div>
@@ -321,11 +337,17 @@ class App extends React.Component {
                     <img
                       className="ml-2 w-14 sm:w-8 md:w-8 lg:w-14"
                       src={insta_dm}
+                      alt="insta_dm"
                     />
                   </a>
                 </div>
               </div>
             </Slider>
+            <div className="flex-col text-lg lg:text-lg sm:text-sm text-right mr-5 mb-24 border-t border-gray-400 lg:mx-48 sm:mx-4 mt-8">
+              <div className="mt-4">문의</div>
+              <div>📧 mcyoo247@gmail.com</div>
+              <div>📱 010-4737-4115</div>
+            </div>
           </div>
         )}
       </section>

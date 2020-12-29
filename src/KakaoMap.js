@@ -9,7 +9,7 @@ const KakaoMap = ({ feed_location }) => {
     const container = document.getElementById("myMap");
     const options = {
       center: new kakao.maps.LatLng(33.371776, 126.543786),
-      level: 10, //33.312006, 126.548005
+      level: 9, //33.312006, 126.548005
     };
     const map = new kakao.maps.Map(container, options);
     // 장소 검색 객체를 생성합니다
@@ -22,7 +22,7 @@ const KakaoMap = ({ feed_location }) => {
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
 
-        var markers = data.map(function (place) {
+        data.map(function (place) {
           return new kakao.maps.Marker({
             map: map,
             position: new kakao.maps.LatLng(place.y, place.x),
@@ -64,7 +64,10 @@ const KakaoMap = ({ feed_location }) => {
   }, []);
 
   return (
-    <div id="myMap" className="mt-10 w-max h-screen lg:h-screen sm:h-64"></div>
+    <div
+      id="myMap"
+      className="mt-6 w-max h-screen lg:h-screen md:h-screen sm:h-64"
+    ></div>
   );
 };
 
