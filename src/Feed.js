@@ -27,6 +27,7 @@ function Feed({
             src={img_url}
             effect="opacity"
             scrollPosition={scrollPosition}
+            visibleByDefault={true}
           />
         </div>
         <div className="flex my-1 items-center text-xl lg:text-lg sm:text-xs">
