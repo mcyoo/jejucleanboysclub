@@ -41,11 +41,6 @@
     />
   </head>
   <body class="text-gray-800 mt-32 lg:mt-32 sm:mt-24 font-mono bg-gray-100">
-    <script
-      type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b1439c56e5405336063a11cfd35547ee&libraries=services,clusterer"
-    ></script>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <header
       class="container inset-0 max-w-full flex items-center justify-evenly h-24 lg:h-24 sm:h-16 bg-white border-b border-gray-400 fixed z-10"
     >
@@ -73,83 +68,5 @@
       </a>
     </header>
     <div id="root" class="w-full overflow-x-hidden"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>
-<!--
-<script>
-      function isPassive() {
-        var supportsPassiveOption = false;
-        try {
-          addEventListener(
-            "test",
-            null,
-            Object.defineProperty({}, "passive", {
-              get: function () {
-                supportsPassiveOption = true;
-              },
-            })
-          );
-        } catch (e) {}
-        return supportsPassiveOption;
-      }
-
-      document.addEventListener(
-        "touchmove",
-        function (e) {
-          e.preventDefault();
-        },
-        isPassive()
-          ? {
-              capture: false,
-              passive: false,
-            }
-          : false
-      );
-      document.addEventListener(
-        "wheel",
-        function (e) {
-          e.preventDefault();
-        },
-        isPassive()
-          ? {
-              capture: false,
-              passive: false,
-            }
-          : false
-      );
-      document.addEventListener(
-        "touchstart",
-        function (e) {
-          e.preventDefault();
-        },
-        isPassive()
-          ? {
-              capture: false,
-              passive: false,
-            }
-          : false
-      );
-      document.addEventListener(
-        "onMouseDown",
-        function (e) {
-          e.preventDefault();
-        },
-        isPassive()
-          ? {
-              capture: false,
-              passive: false,
-            }
-          : false
-      );
-    </script>
--->
