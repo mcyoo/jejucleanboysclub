@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import cleanimage from "./cleanimage.png";
+import greenMark from "./greenMark.png";
 import home_jcbc from "./JCBC.png";
 
 const { kakao } = window;
 
-const KakaoMap = ({ feed_location }) => {
+const KakaoMap = ({ feed_location, season }) => {
   useEffect(() => {
     const container = document.getElementById("myMap");
     const options = {
@@ -12,33 +12,35 @@ const KakaoMap = ({ feed_location }) => {
       level: 9, //33.312006, 126.548005
     };
     const map = new kakao.maps.Map(container, options);
-    // 장소 검색 객체를 생성합니다
-    var ps = new kakao.maps.services.Places();
-    var imageSize = new kakao.maps.Size(24, 35);
-    var markerImage = new kakao.maps.MarkerImage(cleanimage, imageSize);
-
-    function placesSearchCB(data, status, pagination) {
-      if (status === kakao.maps.services.Status.OK) {
-        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-        // LatLngBounds 객체에 좌표를 추가합니다
-
-        data.map(function (place) {
-          return new kakao.maps.Marker({
-            map: map,
-            position: new kakao.maps.LatLng(place.y, place.x),
-            image: markerImage,
-          });
-        });
-      }
-    }
+    var imageSize = new kakao.maps.Size(20, 20);
+    var markerImage = new kakao.maps.MarkerImage(greenMark, imageSize);
+    var geocoder = new kakao.maps.services.Geocoder();
 
     feed_location.map((location) => {
-      ps.keywordSearch(location.name, placesSearchCB);
+      geocoder.addressSearch(location, function (result, status) {
+        // 정상적으로 검색이 완료됐으면
+        if (status === kakao.maps.services.Status.OK) {
+          var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+          // 결과값으로 받은 위치를 마커로 표시합니다
+          var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords,
+            image: markerImage,
+          });
+          marker.setMap(map);
+        }
+      });
     });
 
     var imageSizee = new kakao.maps.Size(40, 40);
     var markerImagee = new kakao.maps.MarkerImage(home_jcbc, imageSizee);
-    var markerPositionn = new kakao.maps.LatLng(33.511632, 126.89077); // 마커가 표시될 위치입니다
+    var markerPositionn;
+    if (season) {
+      markerPositionn = new kakao.maps.LatLng(33.511632, 126.89077);
+    } else {
+      markerPositionn = new kakao.maps.LatLng(33.47825, 126.375026);
+    }
 
     // 마커를 생성합니다
     var markerr = new kakao.maps.Marker({
@@ -66,7 +68,7 @@ const KakaoMap = ({ feed_location }) => {
   return (
     <div
       id="myMap"
-      className="mt-6 w-max h-screen lg:h-screen md:h-screen sm:h-64"
+      className="mt-6 w-max h-screen lg:h-screen md:h-screen sm:h-56"
     ></div>
   );
 };

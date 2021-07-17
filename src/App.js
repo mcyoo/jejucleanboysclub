@@ -19,13 +19,22 @@ class App extends React.Component {
     feeds_date: [],
     feeds_like: [],
     feeds_comment: [],
+    marker_location: [],
     date: true,
     like: false,
     comment: false,
     update_time: "",
+    season1: false,
   };
   getJson = () => {
-    let data = fetch("instagram_data.json", {
+    let season_filename = "";
+    if (this.state.season1) {
+      season_filename = "instagram_data_season1.json";
+    } else {
+      season_filename = "instagram_data_season2.json";
+    }
+
+    let data = fetch(season_filename, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -46,6 +55,7 @@ class App extends React.Component {
       feeds_like,
       feeds_comment,
       update_time,
+      marker_location,
     } = instagramData;
     this.setState({
       feed_count,
@@ -56,12 +66,29 @@ class App extends React.Component {
       feeds_comment,
       isLoading: false,
       update_time,
+      marker_location,
     });
+    /*
+    this.state.feed_count = feed_count;
+    this.state.feed_location = feed_location;
+    this.state.friend_profile = friend_profile;
+    this.state.feeds_date = feeds_date;
+    this.state.feeds_like = feeds_like;
+    this.state.feeds_comment = feeds_comment;
+    this.state.isLoading = false;
+    this.state.update_time = update_time;
+    this.state.marker_location = marker_location;
+    */
+  };
+  season1_sort = () => {
+    this.setState(() => ({ season1: true, isLoading: true }));
+  };
+  season2_sort = () => {
+    this.setState(() => ({ season1: false, isLoading: true }));
   };
   date_sort = () => {
     this.setState(() => ({ date: true, like: false, comment: false }));
   };
-
   like_sort = () => {
     this.setState(() => ({ date: false, like: true, comment: false }));
   };
@@ -71,6 +98,11 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getData();
+  }
+  componentDidUpdate() {
+    if (this.state.isLoading === true) {
+      this.getData();
+    }
   }
   render() {
     const {
@@ -85,10 +117,13 @@ class App extends React.Component {
       like,
       comment,
       update_time,
+      marker_location,
+      season1,
     } = this.state;
     const settings = {
       adaptiveHeight: true,
       dots: true,
+      arrows: false,
       infinite: true,
       speed: 400,
       slidesToShow: 1,
@@ -151,15 +186,54 @@ class App extends React.Component {
       <section className="">
         {isLoading ? (
           <div className="flex justify-center relative mt-24">
-            <span className="">Loading...</span>
+            <span className="">Loading...⏳</span>
           </div>
         ) : (
           <div className="">
             <div className="flex text-xs justify-end mr-5 mb-5">
               🤖{update_time} Update
             </div>
+            {season1 ? (
+              <div className="flex justify-center space-x-3 lg:space-x-3 text-xl lg:text-xl sm:text-sm my-3 sm:space-x-1 mb-6">
+                <button
+                  className={
+                    "text-center border-gray-500 bg-blue-400 py-1 px-6 lg:py-1 lg:px-6 sm:py-1 sm:px-3 text-white rounded-lg"
+                  }
+                  onClick={this.season1_sort}
+                >
+                  시즌1
+                </button>
+                <button
+                  className={
+                    "text-center border-gray-500 bg-blue-600 py-1 px-6 lg:py-1 lg:px-6 sm:py-1 sm:px-3 text-white rounded-lg"
+                  }
+                  onClick={this.season2_sort}
+                >
+                  시즌2
+                </button>
+              </div>
+            ) : (
+              <div className="flex justify-center space-x-3 lg:space-x-3 text-xl lg:text-xl sm:text-sm my-3 sm:space-x-1 mb-6">
+                <button
+                  className={
+                    "text-center border-gray-500 bg-blue-600 py-1 px-6 lg:py-1 lg:px-6 sm:py-1 sm:px-3 text-white rounded-lg"
+                  }
+                  onClick={this.season1_sort}
+                >
+                  시즌1
+                </button>
+                <button
+                  className={
+                    "text-center border-gray-500 bg-blue-400 py-1 px-6 lg:py-1 lg:px-6 sm:py-1 sm:px-3 text-white rounded-lg"
+                  }
+                  onClick={this.season2_sort}
+                >
+                  시즌2
+                </button>
+              </div>
+            )}
             <Slider {...settings}>
-              <div className="w-screen">
+              <div className="w-screen overflow-y-scroll overflow-x-hidden">
                 <div className="text-5xl lg:text-5xl sm:text-xl lg:mx-48 sm:mx-4">
                   <div className="mb-10 lg:mb-10 sm:mb-8">
                     <h4>우리는</h4>
@@ -177,7 +251,7 @@ class App extends React.Component {
                       }}
                       text={[
                         "해양 쓰레기를 줍습니다.",
-                        "지역사회에 기여합니다.",
+                        "작은 변화에서 출발합니다.",
                         "jejucleanboysclub 입니다.",
                       ]}
                       speed={120}
@@ -186,15 +260,21 @@ class App extends React.Component {
                       eraseSpeed={100}
                     />
                   </div>
+                  <div className="mt-8 lg:text-2xl sm:text-sm text-left border-t border-gray-400">
+                    <div className="mt-6 mb-2">⏰ 매일 오전 8시</div>
+                    <div className="mb-6">
+                      🏝 제주도 해안정화 활동 진행중...🏃🏻
+                    </div>
+                  </div>
                   <div className="border-t border-gray-400 text-3xl lg:text-3xl sm:text-xl">
-                    <div className="my-6 flex justify-between">
+                    <div className="mt-6 flex justify-between">
                       <div className="flex">누적 활동횟수</div>
                       <div className="flex">
                         <CountUp end={feed_count} delay={1} duration={6} />
                       </div>
                     </div>
 
-                    <div className="flex justify-between">
+                    <div className="flex justify-between my-6">
                       <div className="flex">참여인원</div>
                       <div className="flex">
                         <CountUp
@@ -204,31 +284,64 @@ class App extends React.Component {
                         />
                       </div>
                     </div>
-                    <div className="flex justify-end space-x-3 lg:space-x-3 text-xl lg:text-xl sm:text-sm my-3 sm:space-x-1">
-                      <button
-                        className={
-                          "text-center border-gray-500 bg-blue-600 py-2 px-4 lg:py-2 lg:px-4 sm:py-1 sm:px-3 text-white rounded-lg"
-                        }
-                        onClick={this.date_sort}
-                      >
-                        날짜순서
-                      </button>
-                      <button
-                        className={
-                          "text-center border-gray-500 bg-blue-600 py-2 px-4 lg:py-2 lg:px-4 sm:py-1 sm:px-3 text-white rounded-lg"
-                        }
-                        onClick={this.like_sort}
-                      >
-                        좋아요순서
-                      </button>
-                      <button
-                        className={
-                          "text-center border-gray-500 bg-blue-600 py-2 px-4 lg:py-2 lg:px-4 sm:py-1 sm:px-3 text-white rounded-lg"
-                        }
-                        onClick={this.comment_sort}
-                      >
-                        댓글순서
-                      </button>
+                    <div className="flex justify-end space-x-3 lg:space-x-3 text-xl lg:text-xl sm:text-sm my-3 sm:space-x-1 mb-6">
+                      {date ? (
+                        <button
+                          className={
+                            "text-center border-gray-500 bg-blue-400 py-2 px-4 lg:py-2 lg:px-4 sm:py-1 sm:px-3 text-white rounded-lg"
+                          }
+                          onClick={this.date_sort}
+                        >
+                          날짜순서
+                        </button>
+                      ) : (
+                        <button
+                          className={
+                            "text-center border-gray-500 bg-blue-600 py-2 px-4 lg:py-2 lg:px-4 sm:py-1 sm:px-3 text-white rounded-lg"
+                          }
+                          onClick={this.date_sort}
+                        >
+                          날짜순서
+                        </button>
+                      )}
+                      {like ? (
+                        <button
+                          className={
+                            "text-center border-gray-500 bg-blue-400 py-2 px-4 lg:py-2 lg:px-4 sm:py-1 sm:px-3 text-white rounded-lg"
+                          }
+                          onClick={this.like_sort}
+                        >
+                          좋아요순서
+                        </button>
+                      ) : (
+                        <button
+                          className={
+                            "text-center border-gray-500 bg-blue-600 py-2 px-4 lg:py-2 lg:px-4 sm:py-1 sm:px-3 text-white rounded-lg"
+                          }
+                          onClick={this.like_sort}
+                        >
+                          좋아요순서
+                        </button>
+                      )}
+                      {comment ? (
+                        <button
+                          className={
+                            "text-center border-gray-500 bg-blue-400 py-2 px-4 lg:py-2 lg:px-4 sm:py-1 sm:px-3 text-white rounded-lg"
+                          }
+                          onClick={this.comment_sort}
+                        >
+                          댓글순서
+                        </button>
+                      ) : (
+                        <button
+                          className={
+                            "text-center border-gray-500 bg-blue-600 py-2 px-4 lg:py-2 lg:px-4 sm:py-1 sm:px-3 text-white rounded-lg"
+                          }
+                          onClick={this.comment_sort}
+                        >
+                          댓글순서
+                        </button>
+                      )}
                     </div>
                     <div className="mt-2 justify-center flex mb-32">
                       {date && (
@@ -278,7 +391,7 @@ class App extends React.Component {
                 </div>
               </div>
 
-              <div className="text-center text-xl w-screen">
+              <div className="text-center text-xl w-screen overflow-y-scroll overflow-x-hidden">
                 활동 지역
                 <div
                   onMouseDown={(e) => {
@@ -291,7 +404,7 @@ class App extends React.Component {
                   }}
                   className="mx-48 lg:mx-48 md:mx-16 sm:mx-4"
                 >
-                  <KakaoMap feed_location={feed_location} />
+                  <KakaoMap feed_location={marker_location} season={season1} />
                 </div>
                 <div className="mx-48 lg:mx-48 md:mx-16 sm:mx-4">
                   {feed_location.map((location) => (
@@ -300,21 +413,15 @@ class App extends React.Component {
                       <div className="flex">{location.count}</div>
                     </div>
                   ))}
-                  <div className="mt-8 lg:text-xl sm:text-sm text-left border-t border-gray-400">
-                    <div className="mt-8">⏰ 매일 오전 8시</div>
-                    <div className="mt-2">
-                      🏝 하도해변 중심으로 해변가 반경 1Km 이내 청소
-                    </div>
-                  </div>
                 </div>
               </div>
 
-              <div className="w-screen">
+              <div className="w-screen overflow-y-scroll overflow-x-hidden">
                 <div className="text-center text-xl mb-6">명예의 전당</div>
                 <div className="flex flex-wrap text-sm lg:text-sm sm:text-xs mx-24 lg:mx-24 sm:mx-2 justify-items-auto justify-evenly">
                   {friend_profile.map((profile) => (
                     <div className="flex flex-col items-center lg:mx-10 lg:mb-12 sm:mx-2 sm:mb-6">
-                      <div>{profile.count}</div>
+                      <div className="mb-2">{profile.count}회</div>
                       <div className="mb-2">{profile.name}</div>
                       <div className="flex">
                         <a
