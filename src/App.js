@@ -115,9 +115,6 @@ class App extends React.Component {
           </div>
         ) : (
           <div className="">
-            <div className="flex text-xs justify-end mr-5 mb-5">
-              🤓{update_time} Update
-            </div>
             <Slider {...settings}>
               <div className="w-screen overflow-x-hidden">
                 <div class="mx-auto px-4 py-8 max-w-xl my-15">
@@ -133,11 +130,13 @@ class App extends React.Component {
                     <div class="px-4 py-2 mt-2">
                       {english ? (
                         <>
-                          <h2 class="font-bold text-xl text-gray-800 tracking-normal">
+                          <h2 class="font-bold text-xl text-gray-800 tracking-normal px-2">
                             Nature-made sculptures
                           </h2>
-                          <p class="text-sm text-gray-700 px-2 mr-1">
-                            What is the message that Jeju Badang wants to say?
+                          <p class="text-sm text-gray-700 px-2 mr-1 break-word">
+                            It is a sculpture made using waste nets and buoys
+                            thrown away from fishing boats. What is the message
+                            that Jeju Badang wants to say?
                           </p>
                           <div class="flex items-center justify-between mt-2 mx-6">
                             <button
@@ -150,11 +149,12 @@ class App extends React.Component {
                         </>
                       ) : (
                         <>
-                          <h2 class="font-bold text-2xl text-gray-800 tracking-normal">
+                          <h2 class="font-bold text-2xl text-gray-800 tracking-normal px-2">
                             자연이 만든 조형물
                           </h2>
-                          <p class="text-sm text-gray-700 px-2 mr-1">
-                            제주바당이 말하고 싶은 메세지는 무엇일까요?
+                          <p class="text-sm text-gray-700 px-2 break-word">
+                            어선에서 버린 폐그물과 부표를 이용해 만들어진 조형물
+                            입니다. 제주바당이 말하고 싶은 메세지는 무엇일까요?
                           </p>
                           <div class="flex items-center justify-between mt-2 mx-6">
                             <button
