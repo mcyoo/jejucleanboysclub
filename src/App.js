@@ -89,18 +89,14 @@ class App extends React.Component {
         if (i === 0) {
           return (
             <div style={{ flex: 1 }}>
-              <img className="w-12 lg:w-12 sm:w-10" alt="ensun" src={ensun} />
+              <img className="w-12 lg:w-16" alt="ensun" src={ensun} />
             </div>
           );
         }
         if (i === 1) {
           return (
             <div style={{ flex: 1 }}>
-              <img
-                className="w-12 lg:w-12 sm:w-10"
-                alt="jcbc_logo"
-                src={jcbc_logo}
-              />
+              <img className="w-12 lg:w-16" alt="jcbc_logo" src={jcbc_logo} />
             </div>
           );
         }
