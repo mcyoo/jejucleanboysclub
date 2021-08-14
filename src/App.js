@@ -2,9 +2,10 @@ import React from "react";
 import Slider from "react-slick";
 import "./assets/App.css";
 import ensun from "./assets/ensun.ico";
+import season1 from "./assets/season1.JPG";
+import season2 from "./assets/season2.JPG";
 import jcbc_logo from "./assets/logo.jpg";
-import jeseogy_art from "./art/jeseogy_art.jpg";
-import jeseogy from "./art/img3.jpg";
+import kctv_jejucleanboysclub from "./assets/kctv_jejucleanboysclub.mp4"
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
@@ -40,8 +41,11 @@ class App extends React.Component {
     });
   };
 
+
   componentDidMount() {
-    this.getData();
+    setTimeout(() => {
+      this.getData();
+    }, 1000);
   }
   handleClickforenglish = () => {
     this.setState({ english: true });
@@ -114,79 +118,19 @@ class App extends React.Component {
       <div className="">
         {isLoading ? (
           <div className="flex justify-center relative mt-24">
-            <span className="">Loading...⏳</span>
-          </div>
+          <span className="">Loading...⏳</span>
+        </div>
         ) : (
           <div className="">
             <Slider {...settings}>
-          
-              <div className="w-screen overflow-x-hidden">
-                <div class="mx-auto px-4 py-8 max-w-xl my-15">
-                  <div class="bg-white shadow-2xl rounded-lg mb-6 tracking-wide">
-                    <div class="md:flex-shrink-0">
-                      <LazyLoadImage
-                        alt="jeseogy_art"
-                        effect="blur"
-                        src={jeseogy_art}
-                        class="w-full rounded-lg rounded-b-none"
-                      />
-                    </div>
-                    <div class="px-4 py-2 mt-2">
-                      {english ? (
-                        <>
-                          <h2 class="font-bold text-xl text-gray-800 tracking-normal px-2">
-                            Nature-made sculptures
-                          </h2>
-                          <p class="text-sm text-gray-700 px-2 mr-1 break-word">
-                            It is a sculpture made using waste nets and buoys
-                            thrown away from fishing boats. What is the message
-                            that Jeju Badang wants to say?
-                          </p>
-                          <div class="flex items-center justify-between mt-2 mx-6">
-                            <button
-                              onClick={this.handleClickforkorean}
-                              class="text-blue-500 text-xs -ml-3 "
-                            >
-                              한국어
-                            </button>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <h2 class="font-bold text-2xl text-gray-800 tracking-normal px-2">
-                            자연이 만든 조형물
-                          </h2>
-                          <p class="text-sm text-gray-700 px-2 break-word">
-                            어선에서 버린 폐그물과 부표를 이용해 만들어진 조형물
-                            입니다. 제주바당이 말하고 싶은 메세지는 무엇일까요?
-                          </p>
-                          <div class="flex items-center justify-between mt-2 mx-6">
-                            <button
-                              onClick={this.handleClickforenglish}
-                              class="text-blue-500 text-xs -ml-3 "
-                            >
-                              English
-                            </button>
-                          </div>
-                        </>
-                      )}
-                      <div class="author flex items-center -ml-3 my-3">
-                        <div class="user-logo">
-                          <img
-                            class="w-12 h-12 object-cover rounded-full mx-4  shadow"
-                            src={jeseogy}
-                            alt="avatar"
-                          ></img>
-                        </div>
-                        <h2 class="text-sm tracking-tighter text-gray-900">
-                          <a href="https://www.instagram.com/jeseogy">
-                            jeseogy
-                          </a>{" "}
-                          <span class="text-gray-600">2021년 5월 10일</span>
-                        </h2>
-                      </div>
-                    </div>
-                  </div>
+              <div className="w-screen overflow-x-hidden flex flex-col">
+              <div className="text-center text-2xl mb-4 text-gray-800 mt-5">
+                  🎊제주클린보이즈산업협회🎊
+                </div>
+                <div className="flex justify-center">
+              <video autoplay="autoplay" muted="muted" controls loop preload="auto">
+                    <source src={kctv_jejucleanboysclub} ></source>
+                </video>
                 </div>
               </div>
               <div className="w-screen overflow-x-hidden">
@@ -245,7 +189,7 @@ class App extends React.Component {
               <div>📱 010-4737-4115</div>
             </div>
           </div>
-        )}
+           )}
       </div>
     );
   }
