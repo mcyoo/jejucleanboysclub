@@ -100,6 +100,13 @@ class App extends React.Component {
             </div>
           );
         }
+        if (i === 2) {
+          return (
+            <div style={{ flex: 1 }}>
+              <img className="w-12 lg:w-16" alt="jcbc_logo" src={jcbc_logo} />
+            </div>
+          );
+        }
       },
     };
 
@@ -112,6 +119,7 @@ class App extends React.Component {
         ) : (
           <div className="">
             <Slider {...settings}>
+          
               <div className="w-screen overflow-x-hidden">
                 <div class="mx-auto px-4 py-8 max-w-xl my-15">
                   <div class="bg-white shadow-2xl rounded-lg mb-6 tracking-wide">
